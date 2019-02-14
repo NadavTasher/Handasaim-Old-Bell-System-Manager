@@ -11,8 +11,8 @@ function login() {
     }).then(response => {
         response.text().then((result) => {
             let json = JSON.parse(result);
-            if (json.hasOwnProperty("success")) {
-                if (json.success) {
+            if (json.hasOwnProperty("auth")) {
+                if (json.auth) {
                     view("upload");
                 } else {
                     alert("Login failed.");
