@@ -1,4 +1,5 @@
 function load() {
+    view("login");
 }
 
 function login() {
