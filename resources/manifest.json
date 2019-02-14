@@ -1,0 +1,22 @@
+{
+  "name": "Bell",
+  "short_name": "Bell",
+  "description": "Upload a ringtone",
+  "start_url": "../index.html",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF",
+  "display": "standalone",
+  "orientation": "natural",
+  "icons": [
+    {
+      "src": "../images/icon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "../images/icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
