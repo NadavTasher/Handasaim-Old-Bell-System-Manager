@@ -7,7 +7,7 @@ $database = json_decode(file_get_contents(databaseFile));
 if (isset($_POST["key"])) {
     $result = new stdClass();
     $result->auth = false;
-    if (md5($_POST["key"] === $settings->password)) {
+    if (md5($_POST["key"]) === $settings->password) {
         $result->auth = true;
         if (isset($_POST["name"]) && isset($_POST["second"]) && isset($_POST["index"]) && isset($_POST["audio"])) {
             $result->success = false;
