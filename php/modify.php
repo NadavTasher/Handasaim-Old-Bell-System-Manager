@@ -14,7 +14,7 @@ if (isset($_POST["key"])) {
             $name = $_POST["name"];
             $second = $_POST["second"];
             $index = intval($_POST["index"], 10);
-            move_uploaded_file($_FILES['audio']['tmp_name'], audioDirectory . $name . ".mp3");
+            move_uploaded_file($_FILES["audio"]["tmp_name"], audioDirectory . $name . ".mp3");
             for ($i = 0; $i < sizeof($database->queue); $i++) {
                 if ($i === $index) {
                     $database->queue[$i]->link = $name . ".mp3";

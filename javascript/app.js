@@ -29,28 +29,30 @@ function upload() {
     form.append("second", get("second").value);
     form.append("index", get("time").value);
     form.append("audio", get("file").files[0]);
-    fetch("php/modify.php", {
-        method: "post",
-        body: form,
-        // headers: {
-        //     'Content-Type': 'application/x-www-form-urlencoded'
-        // }
-    }).then(response => {
-        response.text().then((result) => {
-            let json = JSON.parse(result);
-            if (json.hasOwnProperty("success")) {
-                if (json.success) {
-                    out("Saved!");
-                } else {
-                    out("Not Saved");
+    if (get("name").value.length > 0 && get("second").value.length > 0 && get("time").value.length > 0) {
+        fetch("php/modify.php", {
+            method: "post",
+            body: form,
+        }).then(response => {
+            response.text().then((result) => {
+                let json = JSON.parse(result);
+                if (json.hasOwnProperty("success")) {
+                    if (json.success) {
+                        out("Saved!");
+                        setTimeout(() => {
+                            view("upload");
+                        }, 3000);
+                    } else {
+                        out("Not Saved");
+                    }
                 }
-            }
+            });
         });
-    });
-    out("Upload started.");
+        out("Upload started.");
+    }
 }
 
-function out(text){
-    get("output").innerText=text;
+function out(text) {
+    get("output").innerText = text;
     view("output");
 }
