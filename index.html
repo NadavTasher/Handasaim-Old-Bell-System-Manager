@@ -31,7 +31,7 @@ https://github.com/NadavTasher/WebAppBase/
     <div id="upload">
         <p>Upload File</p>
         <input id="name" placeholder="Ringtone Name" type="text" value="">
-        <input id="file" placeholder="Ringtone File" type="file" value="">
+        <input id="file" name="audio" placeholder="Ringtone File" type="file" value="">
         <input id="second" placeholder="Beginning Time" type="text" value="0">
         <select id="time">
             <option value="0">7:45</option>
@@ -54,6 +54,7 @@ https://github.com/NadavTasher/WebAppBase/
         </select>
         <button onclick="upload()">Upload And Save</button>
     </div>
+    <p id="output"></p>
 </div>
 </body>
 </html>
