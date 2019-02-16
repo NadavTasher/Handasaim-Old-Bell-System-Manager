@@ -28,6 +28,14 @@ https://github.com/NadavTasher/WebAppBase/
         <input id="key" placeholder="Admin Key" type="password" value="">
         <button onclick="login()">Login</button>
     </div>
+    <div id="home">
+        <button onclick="view('upload')">Upload New Ringtone</button>
+        <button onclick="view('settings')">Other Settings</button>
+    </div>
+    <div id="settings">
+        <input id="length" placeholder="Ringtone Length" value="30"/>
+        <button id="muteState">Mute / Unmute</button>
+    </div>
     <div id="upload">
         <p>Upload File</p>
         <input id="name" placeholder="Ringtone Name" type="text" value="">
