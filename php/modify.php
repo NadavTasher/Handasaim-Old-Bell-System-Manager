@@ -17,13 +17,13 @@ if (isset($_POST["key"])) {
             $audio = base64_decode($_POST["audio"]);
             for ($i = 0; $i < sizeof($database->queue); $i++) {
                 if ($i === $index) {
-                    $database->queue[$i]->link = $name . "mp3";
+                    $database->queue[$i]->link = $name . ".mp3";
                     $database->queue[$i]->time = floatval($second);
                     $database->queue[$i]->md5 = md5($audio);
                     $result->success = true;
                 }
             }
-            file_put_contents(audioDirectory . $name . "mp3", $audio);
+            file_put_contents(audioDirectory . $name . ".mp3", $audio);
             file_put_contents(databaseFile, json_encode($database));
         }
     }
