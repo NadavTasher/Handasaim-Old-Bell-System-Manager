@@ -1,28 +1,11 @@
 let mute = false;
 
 function load() {
-    view("login");
-}
-
-function login() {
-    let form = new FormData();
-    form.append("key", get("key").value);
-    fetch("php/modify.php", {
-        method: "post",
-        body: form
-    }).then(response => {
-        response.text().then((result) => {
-            let json = JSON.parse(result);
-            if (json.hasOwnProperty("auth")) {
-                if (json.auth) {
-                    view("home");
-                    loadSettings();
-                } else {
-                    alert("Login failed.");
-                }
-            }
-        });
-    });
+    loadSettings();
+    if (isLoggedIn()) {
+        view("postlogin");
+        view("home");
+    }
 }
 
 function flipMute() {
@@ -44,9 +27,8 @@ function loadSettings() {
 }
 
 function saveSettings() {
-    let form = new FormData();
-    form.append("action", "settings");
-    form.append("key", get("key").value);
+    let form = fillForm();
+    form.append("bell", "settings");
     form.append("length", get("length").value);
     form.append("mute", mute);
     fetch("php/modify.php", {
@@ -71,10 +53,9 @@ function saveSettings() {
 }
 
 function upload() {
-    let form = new FormData();
-    form.append("action", "upload");
+    let form = fillForm();
+    form.append("bell", "upload");
     form.append("name", get("name").value);
-    form.append("key", get("key").value);
     form.append("second", get("second").value);
     form.append("index", get("time").value);
     form.append("audio", get("file").files[0]);
