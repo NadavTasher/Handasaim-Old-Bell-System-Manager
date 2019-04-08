@@ -1,6 +1,6 @@
 <?php
 
-const REGISTRATION_ENABLED = true;
+const REGISTRATION_ENABLED = false;
 const MINIMUM_PASSWORD_LENGTH = 8;
 const LOCKOUT_TIME = 5 * 60;
 const LOCKOUT_ATTEMPTS = 5;
