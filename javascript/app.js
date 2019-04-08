@@ -1,3 +1,5 @@
+let mute = false;
+
 function load() {
     view("login");
 }
@@ -13,7 +15,8 @@ function login() {
             let json = JSON.parse(result);
             if (json.hasOwnProperty("auth")) {
                 if (json.auth) {
-                    view("upload");
+                    view("home");
+                    loadSettings();
                 } else {
                     alert("Login failed.");
                 }
@@ -22,8 +25,54 @@ function login() {
     });
 }
 
+function flipMute() {
+    mute = !mute;
+    get("mute").innerText = mute ? "Unmute" : "Mute";
+}
+
+function loadSettings() {
+    fetch("php/settings.php", {
+        method: "get",
+    }).then(response => {
+        response.text().then((result) => {
+            let json = JSON.parse(result);
+            mute = json.mute;
+            get("mute").innerText = mute ? "Unmute" : "Mute";
+            get("length").value = json.length;
+        });
+    });
+}
+
+function saveSettings() {
+    let form = new FormData();
+    form.append("action", "settings");
+    form.append("key", get("key").value);
+    form.append("length", get("length").value);
+    form.append("mute", mute);
+    fetch("php/modify.php", {
+        method: "post",
+        body: form,
+    }).then(response => {
+        response.text().then((result) => {
+            let json = JSON.parse(result);
+            if (json.hasOwnProperty("success")) {
+                if (json.success) {
+                    out("Saved!");
+                    setTimeout(() => {
+                        window.location.reload(true);
+                    }, 3000);
+                } else {
+                    out("Not Saved");
+                }
+            }
+        });
+    });
+    out("Save started.");
+}
+
 function upload() {
     let form = new FormData();
+    form.append("action", "upload");
     form.append("name", get("name").value);
     form.append("key", get("key").value);
     form.append("second", get("second").value);
